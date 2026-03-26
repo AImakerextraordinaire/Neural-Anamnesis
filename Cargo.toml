@@ -1,0 +1,64 @@
+[package]
+name = "neural-anamnesis"
+version = "0.1.0"
+edition = "2021"
+description = "SSD-sectored differentiable neural memory with growth-based forgetting avoidance"
+authors = ["Rex (Darren) & Claude"]
+license = "MIT"
+
+[dependencies]
+# Tensor operations (HuggingFace)
+candle-core = "0.8"
+candle-nn = "0.8"
+
+# Async runtime
+tokio = { version = "1.28", features = ["full"] }
+
+# Web framework (REST API)
+axum = { version = "0.7", features = ["ws"] }
+
+# gRPC (Python interop)
+tonic = "0.12"
+prost = "0.13"
+
+# Parallelism
+rayon = "1.10"
+
+# Memory-mapped files (sector I/O)
+memmap2 = "0.9"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+bincode = "1"
+
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Error handling
+thiserror = "1"
+anyhow = "1"
+
+# Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# UUID
+uuid = { version = "1", features = ["v4", "serde"] }
+
+# Directory utilities
+dirs = "5"
+
+# HTTP client (for Anamnesis DB oracle)
+reqwest = { version = "0.11", features = ["json"] }
+
+[build-dependencies]
+tonic-build = "0.12"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
